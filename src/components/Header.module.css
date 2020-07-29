@@ -1,0 +1,17 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  background-color: #ECF0F1;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.name {
+  font-size: 1rem;
+  font-weight: bold;
+}
