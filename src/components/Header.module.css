@@ -3,7 +3,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 1.5rem;
-  background-color: #ECF0F1;
+  width: 960px;
 }
 
 .title {
@@ -14,4 +14,11 @@
 .name {
   font-size: 1rem;
   font-weight: bold;
+}
+
+.header {
+  display: flex;
+  width: 100%;
+  background-color: #ECF0F1;
+  justify-content: center;
 }
