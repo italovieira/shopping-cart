@@ -36,5 +36,40 @@ input[type=submit] {
 
 hr {
   border: 0;
-  border-top: 0.01px solid #bdc3c7;
+  border-top: 0.1px solid #bdc3c7;
+}
+
+.product {
+  display: flex;
+  height: 60px;
+}
+
+.image {
+  width: 60px;
+  background-color: black;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  width: 25px;
+  color: #bdc3c7;
+}
+
+.buttons > * {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  border: 1px solid #bdc3c7;
+  border-radius: 5px;
+}
+
+.productInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  flex: 1;
+  padding: 0 10px;
+  width: auto;
 }

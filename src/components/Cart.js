@@ -6,6 +6,8 @@ const Cart = () => {
     <section className={styles.container}>
       <div className={styles.header}>Shopping Cart</div>
 
+      <CartProduct></CartProduct>
+
       <div>
         <div className={`${styles.spaceBetween} ${styles.margin}`}>
           <input type="text" placeholder="Discount code" />
@@ -25,6 +27,29 @@ const Cart = () => {
         </strong>
       </div>
     </section>
+  )
+}
+
+const CartProductList = () => {
+  return true
+}
+
+const CartProduct = () => {
+  return (
+    <div className={styles.product}>
+      <div className={styles.image}></div>
+      <div className={styles.productInfo}>
+        <div className={styles.productName}>Product name</div>
+        <div className={styles.spaceBetween}>
+          <div className={styles.quantity}>Quantity: 4</div>
+          <div className={styles.price}>$ 123,45</div>
+        </div>
+      </div>
+      <div className={styles.buttons}>
+        <div>+</div>
+        <div>-</div>
+      </div>
+    </div>
   )
 }
 
