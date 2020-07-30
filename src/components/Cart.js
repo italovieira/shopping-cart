@@ -6,7 +6,7 @@ const Cart = () => {
     <section className={styles.container}>
       <div className={styles.header}>Shopping Cart</div>
 
-      <CartProduct></CartProduct>
+      <CartProductList />
 
       <div>
         <div className={`${styles.spaceBetween} ${styles.margin}`}>
@@ -31,7 +31,12 @@ const Cart = () => {
 }
 
 const CartProductList = () => {
-  return true
+  return (
+    <div className={`${styles.productList} ${styles.margin}`}>
+      <CartProduct />
+      <CartProduct />
+    </div>
+  )
 }
 
 const CartProduct = () => {
