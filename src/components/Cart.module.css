@@ -1,0 +1,40 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 320px;
+  border-radius: 8px;
+  background-color: #ecf0f1;
+}
+
+.header {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 0.5rem;
+  background-color: #bdc3c7;
+  border-top-left-radius: inherit;
+  border-top-right-radius: inherit;
+}
+
+.spaceBetween {
+  display: flex;
+  justify-content: space-between;
+}
+
+.margin {
+  margin: 8px;
+}
+
+input[type=text] {
+  width: 60%;
+}
+
+input[type=submit] {
+  width: 30%;
+}
+
+hr {
+  border: 0;
+  border-top: 0.01px solid #bdc3c7;
+}
