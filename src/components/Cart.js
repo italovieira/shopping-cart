@@ -51,8 +51,8 @@ const CartProduct = () => {
         </div>
       </div>
       <div className={styles.buttons}>
-        <div>+</div>
-        <div>-</div>
+        <button>+</button>
+        <button>-</button>
       </div>
     </div>
   )

@@ -11,9 +11,9 @@ const Product = () => {
         </div>
         <span>$ 123,00 &#8231; 2 left</span>
       </div>
-      <div className={styles.button}>
+      <button className={styles.button}>
         <strong>BUY</strong>
-      </div>
+      </button>
     </div>
   )
 }

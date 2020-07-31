@@ -34,8 +34,9 @@
 }
 
 .button {
-  display: flex;
-  justify-content: center;
+  display: grid;
+  place-items: center;
+  width: inherit;
   height: 40px;
   background-color: black;
   color: white;
