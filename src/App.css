@@ -9,6 +9,7 @@ main {
   flex-wrap: wrap;
   margin: 40px;
   justify-content: center;
+  align-items: start;
 }
 
 .centered {

@@ -2,6 +2,7 @@ import React from 'react'
 import Header from './components/Header'
 import Cart from './components/Cart'
 import ProductList from './components/Product'
+import Checkout from './components/Checkout'
 import './App.css'
 
 const App = () => {
@@ -12,6 +13,7 @@ const App = () => {
         <ProductList />
         <div className="centered">
           <Cart />
+          <Checkout />
         </div>
       </main>
     </div>

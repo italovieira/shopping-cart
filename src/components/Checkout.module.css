@@ -1,0 +1,10 @@
+.checkout {
+  display: grid;
+  place-items: center;
+  margin-top: 24px;
+  width: 320px;
+  height: 64px;
+  border-radius: 8px;
+  background-color: black;
+  color: white;
+}
