@@ -33,21 +33,21 @@ const Cart = () => {
 const CartProductList = () => {
   return (
     <div className={`${styles.productList} ${styles.margin}`}>
-      <CartProduct />
-      <CartProduct />
+      <CartProduct name="Product name" price="123,45" quantity="4" />
+      <CartProduct name="Product name" price="123,45" quantity="4" />
     </div>
   )
 }
 
-const CartProduct = () => {
+const CartProduct = (props) => {
   return (
     <div className={styles.product}>
       <div className={styles.image}></div>
       <div className={styles.productInfo}>
-        <div className={styles.productName}>Product name</div>
+        <div className={styles.productName}>{props.name}</div>
         <div className={styles.spaceBetween}>
-          <div className={styles.quantity}>Quantity: 4</div>
-          <div className={styles.price}>$ 123,45</div>
+          <div className={styles.quantity}>Quantity: {props.quantity}</div>
+          <div className={styles.price}>$ {props.price}</div>
         </div>
       </div>
       <div className={styles.buttons}>

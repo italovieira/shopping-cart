@@ -1,15 +1,17 @@
 import React from 'react'
 import styles from './Product.module.css'
 
-const Product = () => {
+const Product = (props) => {
   return (
     <div className={styles.product}>
       <div className={styles.image}></div>
       <div className={styles.productInfo}>
         <div>
-          <strong>Product name</strong>
+          <strong>{props.name}</strong>
         </div>
-        <span>$ 123,00 &#8231; 2 left</span>
+        <span>
+          $ {props.price} &#8231; {props.available} left
+        </span>
       </div>
       <button className={styles.button}>
         <strong>BUY</strong>
@@ -21,14 +23,14 @@ const Product = () => {
 const ProductList = () => {
   return (
     <section className={styles.productList}>
-      <Product />
-      <Product />
-      <Product />
-      <Product />
-      <Product />
-      <Product />
-      <Product />
-      <Product />
+      <Product name="Product name" price="123,00" available="2" />
+      <Product name="Product name" price="123,00" available="2" />
+      <Product name="Product name" price="123,00" available="2" />
+      <Product name="Product name" price="123,00" available="2" />
+      <Product name="Product name" price="123,00" available="2" />
+      <Product name="Product name" price="123,00" available="2" />
+      <Product name="Product name" price="123,00" available="2" />
+      <Product name="Product name" price="123,00" available="2" />
     </section>
   )
 }
