@@ -1,6 +1,7 @@
 import React from 'react'
 import Header from './components/Header'
 import Cart from './components/Cart'
+import ProductList from './components/Product'
 import './App.css'
 
 const App = () => {
@@ -8,7 +9,10 @@ const App = () => {
     <div className="App">
       <Header />
       <main>
-        <Cart />
+        <ProductList />
+        <div className="centered">
+          <Cart />
+        </div>
       </main>
     </div>
   )
