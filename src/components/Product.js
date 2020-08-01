@@ -1,4 +1,6 @@
-import React from 'react'
+import React, { useState, useContext } from 'react'
+import AppContext from '../AppContext'
+
 import styles from './Product.module.css'
 
 const Product = (props) => {
@@ -21,16 +23,18 @@ const Product = (props) => {
 }
 
 const ProductList = () => {
+  const { products } = useContext(AppContext)
+
   return (
     <section className={styles.productList}>
-      <Product name="Product name" price="123,00" available="2" />
-      <Product name="Product name" price="123,00" available="2" />
-      <Product name="Product name" price="123,00" available="2" />
-      <Product name="Product name" price="123,00" available="2" />
-      <Product name="Product name" price="123,00" available="2" />
-      <Product name="Product name" price="123,00" available="2" />
-      <Product name="Product name" price="123,00" available="2" />
-      <Product name="Product name" price="123,00" available="2" />
+      {products.map((product) => (
+        <Product
+          key={product.id}
+          name={product.name}
+          price={product.price}
+          available={product.available}
+        />
+      ))}
     </section>
   )
 }

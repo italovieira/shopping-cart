@@ -1,4 +1,6 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import AppContext from '../AppContext'
+
 import styles from './Cart.module.css'
 
 const Cart = () => {
@@ -31,10 +33,18 @@ const Cart = () => {
 }
 
 const CartProductList = () => {
+  const { cartProducts } = useContext(AppContext)
+
   return (
     <div className={`${styles.productList} ${styles.margin}`}>
-      <CartProduct name="Product name" price="123,45" quantity="4" />
-      <CartProduct name="Product name" price="123,45" quantity="4" />
+      {cartProducts.map((product) => (
+        <CartProduct
+          key={product.id}
+          name={product.name}
+          price={product.price}
+          quantity={product.quantity}
+        />
+      ))}
     </div>
   )
 }
@@ -47,7 +57,7 @@ const CartProduct = (props) => {
         <div className={styles.productName}>{props.name}</div>
         <div className={styles.spaceBetween}>
           <div className={styles.quantity}>Quantity: {props.quantity}</div>
-          <div className={styles.price}>$ {props.price}</div>
+          <div className={styles.price}>$ {props.price * props.quantity}</div>
         </div>
       </div>
       <div className={styles.buttons}>

@@ -3,6 +3,8 @@ import Header from './components/Header'
 import Cart from './components/Cart'
 import ProductList from './components/Product'
 import Checkout from './components/Checkout'
+import { AppProvider } from './AppContext'
+
 import './App.css'
 
 const App = () => {
@@ -10,11 +12,13 @@ const App = () => {
     <div className="App">
       <Header />
       <main>
-        <ProductList />
-        <div className="centered">
-          <Cart />
-          <Checkout />
-        </div>
+        <AppProvider>
+          <ProductList />
+          <div className="centered">
+            <Cart />
+            <Checkout />
+          </div>
+        </AppProvider>
       </main>
     </div>
   )
