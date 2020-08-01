@@ -7,16 +7,11 @@ const initialProducts = [
   { id: 4, name: 'Mango', price: 15.0, available: 20 },
 ]
 
-const initialCartProducts = [
-  { ...initialProducts[0], quantity: 3 },
-  { ...initialProducts[1], quantity: 1 },
-]
-
 export const AppContext = createContext()
 
 export const AppProvider = ({ children }) => {
   const [products, setProducts] = useState(initialProducts)
-  const [cartProducts, setCartProducts] = useState(initialCartProducts)
+  const [cartProducts, setCartProducts] = useState([])
 
   return (
     <AppContext.Provider
