@@ -5,7 +5,10 @@ import styles from './Product.module.css'
 
 const Product = (props) => {
   const { cartProducts, setCartProducts } = useContext(AppContext)
+  const [alreadyAdded, setAlreadyAdded] = useState(false)
+
   const handleBuy = (product) => {
+    setAlreadyAdded(true)
     setCartProducts([...cartProducts, { ...product, quantity: 1 }])
   }
 
@@ -20,7 +23,11 @@ const Product = (props) => {
           $ {props.price} &#8231; {props.available} left
         </span>
       </div>
-      <button className={styles.button} onClick={() => handleBuy(props)}>
+      <button
+        className={styles.button}
+        onClick={() => handleBuy(props)}
+        disabled={alreadyAdded}
+      >
         <strong>BUY</strong>
       </button>
     </div>
@@ -38,6 +45,7 @@ const ProductList = () => {
           name={product.name}
           price={product.price}
           available={product.available}
+          alreadyAdded={false}
         />
       ))}
     </section>
