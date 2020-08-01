@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useReducer } from 'react'
 import AppContext from '../AppContext'
 
 import styles from './Cart.module.css'
@@ -49,7 +49,20 @@ const CartProductList = () => {
   )
 }
 
+const reducer = (quantity, action) => {
+  switch (action.type) {
+    case 'INCREMENT':
+      return quantity + 1
+    case 'DECREMENT':
+      return quantity - 1
+    default:
+      return quantity
+  }
+}
+
 const CartProduct = (props) => {
+  const [quantity, dispatch] = useReducer(reducer, 1)
+
   return (
     <div className={styles.product}>
       <div className={styles.image}></div>
@@ -58,13 +71,13 @@ const CartProduct = (props) => {
           <strong>{props.name}</strong>
         </div>
         <div className={styles.spaceBetween}>
-          <div className={styles.quantity}>Quantity: {props.quantity}</div>
-          <div className={styles.price}>$ {props.price * props.quantity}</div>
+          <div className={styles.quantity}>Quantity: {quantity}</div>
+          <div className={styles.price}>$ {props.price * quantity}</div>
         </div>
       </div>
       <div className={styles.buttons}>
-        <button>+</button>
-        <button>-</button>
+        <button onClick={() => dispatch({ type: 'INCREMENT' })}>+</button>
+        <button onClick={() => dispatch({ type: 'DECREMENT' })}>-</button>
       </div>
     </div>
   )
