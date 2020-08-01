@@ -5,6 +5,6 @@
   width: 320px;
   height: 64px;
   border-radius: 8px;
-  background-color: black;
+  background-color: var(--enabled-color);
   color: white;
 }

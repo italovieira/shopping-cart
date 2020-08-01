@@ -18,3 +18,10 @@ main {
   align-items: center;
   flex: 1;
 }
+
+.theme {
+  --primary-color: #ecf0f1;
+  --secondary-color: #bdc3c7;
+  --enabled-color: #000000;
+  --disabled-color: #bdc3c7;
+}
