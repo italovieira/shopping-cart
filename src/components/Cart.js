@@ -54,7 +54,9 @@ const CartProduct = (props) => {
     <div className={styles.product}>
       <div className={styles.image}></div>
       <div className={styles.productInfo}>
-        <div className={styles.productName}>{props.name}</div>
+        <div className={styles.productName}>
+          <strong>{props.name}</strong>
+        </div>
         <div className={styles.spaceBetween}>
           <div className={styles.quantity}>Quantity: {props.quantity}</div>
           <div className={styles.price}>$ {props.price * props.quantity}</div>
