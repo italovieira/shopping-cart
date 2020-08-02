@@ -12,7 +12,6 @@ export const AppContext = createContext()
 
 export const AppProvider = ({ children }) => {
   const [products, setProducts] = useState(initialProducts)
-  const [cartProducts, setCartProducts] = useState([])
 
   const reducer = (cart, action) => {
     switch (action.type) {
@@ -24,12 +23,15 @@ export const AppProvider = ({ children }) => {
         return { ...cart, discount: action.payload }
       case actions.CART_COMPUTE_TOTAL:
         return { ...cart, total: action.payload }
+      case actions.CART_UPDATE_PRODUCTS:
+        return { ...cart, products: action.payload }
       default:
         return cart
     }
   }
 
   const [cart, dispatch] = useReducer(reducer, {
+    products: [],
     subtotal: 0,
     shipping: 0,
     discount: 0,
@@ -40,11 +42,10 @@ export const AppProvider = ({ children }) => {
     <AppContext.Provider
       value={{
         products,
-        cartProducts,
         setProducts,
-        setCartProducts,
         cart,
         dispatch,
+        vouchers,
       }}
     >
       {children}

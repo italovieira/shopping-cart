@@ -1,33 +1,37 @@
 import React, { useState, useEffect, useContext } from 'react'
 import AppContext from '../AppContext'
+import { updateProductQuantity, addProduct } from '../helpers/cart-helper'
+import actions from '../actions'
 
 import styles from './Product.module.css'
 
 const Product = (props) => {
-  const { cartProducts, setCartProducts } = useContext(AppContext)
+  const { cart, dispatch } = useContext(AppContext)
   const [alreadyAdded, setAlreadyAdded] = useState(false)
   const [quantity, setQuantity] = useState(1)
   const [available, setAvailable] = useState(props.available)
 
   useEffect(() => {
-    setCartProducts((cartProducts) => {
-      const clone = [...cartProducts]
-
-      clone.forEach((product) => {
-        if (props.id === product.id) {
-          product.quantity = quantity
-        }
-      })
-      return clone
+    dispatch({
+      type: actions.CART_UPDATE_PRODUCTS,
+      payload: updateProductQuantity(props.id, quantity, cart.products),
     })
   }, [quantity])
 
   const handleBuy = (product) => {
+    const cartProduct = {
+      ...product,
+      quantity,
+      setQuantity,
+      setAvailable,
+      id: product.id,
+    }
+
     setAlreadyAdded(true)
-    setCartProducts([
-      ...cartProducts,
-      { ...product, quantity, setQuantity, setAvailable, id: product.id },
-    ])
+    dispatch({
+      type: actions.CART_UPDATE_PRODUCTS,
+      payload: addProduct(cartProduct, cart.products),
+    })
   }
 
   return (

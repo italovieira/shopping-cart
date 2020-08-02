@@ -10,25 +10,28 @@ import actions from '../actions'
 import styles from './Cart.module.css'
 
 const Cart = () => {
-  const { cart, dispatch, cartProducts } = useContext(AppContext)
+  const { cart, dispatch } = useContext(AppContext)
 
+  // update subtotal
   useEffect(() => {
     dispatch({
       type: actions.CART_COMPUTE_SUBTOTAL,
-      payload: computeSubtotal(cartProducts),
+      payload: computeSubtotal(cart.products),
     })
-  }, [cartProducts])
+  }, [cart.products])
 
+  // update shipping
   useEffect(() => {
     dispatch({
       type: actions.CART_COMPUTE_SHIPPING,
-      payload: computeShipping(cart, cartProducts),
+      payload: computeShipping(cart),
     })
-  }, [cartProducts])
+  }, [cart.products, cart.subtotal])
 
+  // update total
   useEffect(() => {
     dispatch({ type: actions.CART_COMPUTE_TOTAL, payload: computeTotal(cart) })
-  }, [cartProducts])
+  }, [cart.subtotal, cart.shipping, cart.discount])
 
   return (
     <section className={styles.container}>
@@ -59,11 +62,11 @@ const Cart = () => {
 }
 
 const CartProductList = () => {
-  const { cartProducts } = useContext(AppContext)
+  const { cart } = useContext(AppContext)
 
   return (
     <div className={`${styles.productList} ${styles.margin}`}>
-      {cartProducts.map((product) => (
+      {Array.from(cart.products).map((product) => (
         <CartProduct
           key={product.id}
           name={product.name}
@@ -91,7 +94,6 @@ const reducer = (quantity, action) => {
 }
 
 const CartProduct = (props) => {
-  const { setCart, cartProducts } = useContext(AppContext)
   const [quantity, dispatch] = useReducer(reducer, props.quantity)
 
   useEffect(() => {
