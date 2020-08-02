@@ -5,37 +5,29 @@ import {
   computeShipping,
   computeTotal,
 } from '../helpers/cart-helper'
+import actions from '../actions'
 
 import styles from './Cart.module.css'
 
 const Cart = () => {
-  const { cart, setCart, cartProducts } = useContext(AppContext)
+  const { cart, dispatch, cartProducts } = useContext(AppContext)
 
   useEffect(() => {
-    setCart((cart) => {
-      return {
-        ...cart,
-        subtotal: computeSubtotal(cartProducts),
-      }
+    dispatch({
+      type: actions.CART_COMPUTE_SUBTOTAL,
+      payload: computeSubtotal(cartProducts),
     })
   }, [cartProducts])
 
   useEffect(() => {
-    setCart((cart) => {
-      return {
-        ...cart,
-        shipping: computeShipping(cart, cartProducts),
-      }
+    dispatch({
+      type: actions.CART_COMPUTE_SHIPPING,
+      payload: computeShipping(cart, cartProducts),
     })
   }, [cartProducts])
 
   useEffect(() => {
-    setCart((cart) => {
-      return {
-        ...cart,
-        total: computeTotal(cart),
-      }
-    })
+    dispatch({ type: actions.CART_COMPUTE_TOTAL, payload: computeTotal(cart) })
   }, [cartProducts])
 
   return (

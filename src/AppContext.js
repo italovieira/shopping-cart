@@ -1,4 +1,5 @@
-import React, { useState, useMemo, createContext } from 'react'
+import React, { useState, useReducer, createContext } from 'react'
+import actions from './actions'
 
 const initialProducts = [
   { id: 1, name: 'Banana', price: 10.0, available: 10 },
@@ -12,7 +13,23 @@ export const AppContext = createContext()
 export const AppProvider = ({ children }) => {
   const [products, setProducts] = useState(initialProducts)
   const [cartProducts, setCartProducts] = useState([])
-  const [cart, setCart] = useState({
+
+  const reducer = (cart, action) => {
+    switch (action.type) {
+      case actions.CART_COMPUTE_SUBTOTAL:
+        return { ...cart, subtotal: action.payload }
+      case actions.CART_COMPUTE_SHIPPING:
+        return { ...cart, shipping: action.payload }
+      case actions.CART_COMPUTE_DISCOUNT:
+        return { ...cart, discount: action.payload }
+      case actions.CART_COMPUTE_TOTAL:
+        return { ...cart, total: action.payload }
+      default:
+        return cart
+    }
+  }
+
+  const [cart, dispatch] = useReducer(reducer, {
     subtotal: 0,
     shipping: 0,
     discount: 0,
@@ -27,7 +44,7 @@ export const AppProvider = ({ children }) => {
         setProducts,
         setCartProducts,
         cart,
-        setCart,
+        dispatch,
       }}
     >
       {children}
