@@ -21,3 +21,6 @@ export const computeShipping = (cart, cartProducts) => {
 
   return 30 + Math.floor((quantity - 10) / 5) * 7
 }
+
+export const computeTotal = (cart) =>
+  cart.subtotal + cart.shipping - cart.discount

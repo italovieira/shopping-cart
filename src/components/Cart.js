@@ -1,6 +1,10 @@
 import React, { useContext, useReducer, useEffect } from 'react'
 import AppContext from '../AppContext'
-import { computeSubtotal, computeShipping } from '../helpers/cart-helper'
+import {
+  computeSubtotal,
+  computeShipping,
+  computeTotal,
+} from '../helpers/cart-helper'
 
 import styles from './Cart.module.css'
 
@@ -21,6 +25,15 @@ const Cart = () => {
       return {
         ...cart,
         shipping: computeShipping(cart, cartProducts),
+      }
+    })
+  }, [cartProducts])
+
+  useEffect(() => {
+    setCart((cart) => {
+      return {
+        ...cart,
+        total: computeTotal(cart),
       }
     })
   }, [cartProducts])
