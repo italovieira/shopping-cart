@@ -1,9 +1,23 @@
-import React, { useContext, useReducer } from 'react'
+import React, { useContext, useReducer, useEffect } from 'react'
 import AppContext from '../AppContext'
 
 import styles from './Cart.module.css'
 
 const Cart = () => {
+  const { cart, setCart, cartProducts } = useContext(AppContext)
+
+  useEffect(() => {
+    setCart((cart) => {
+      return {
+        ...cart,
+        subtotal: cartProducts
+          .map((product) => product.price * product.quantity)
+          .reduce((x, y) => x + y, 0),
+        total: 0,
+      }
+    })
+  }, [cartProducts])
+
   return (
     <section className={styles.container}>
       <div className={styles.header}>Shopping Cart</div>
@@ -18,14 +32,14 @@ const Cart = () => {
       </div>
 
       <div className={styles.info}>
-        <CartInfo title="Subtotal" value="234,00" />
+        <CartInfo title="Subtotal" value={cart.subtotal} />
         <hr />
-        <CartInfo title="Shipping" value="10,00" />
+        <CartInfo title="Shipping" value={cart.shipping} />
         <hr />
-        <CartInfo title="Discount" value="1,00" />
+        <CartInfo title="Discount" value={cart.discount} />
         <hr />
         <strong>
-          <CartInfo title="Total" value="244,00" />
+          <CartInfo title="Total" value={cart.total} />
         </strong>
       </div>
     </section>
@@ -43,6 +57,7 @@ const CartProductList = () => {
           name={product.name}
           price={product.price}
           quantity={product.quantity}
+          setQuantity={product.setQuantity}
         />
       ))}
     </div>
@@ -53,6 +68,7 @@ const reducer = (quantity, action) => {
   switch (action.type) {
     case 'INCREMENT':
       return quantity + 1
+
     case 'DECREMENT':
       return quantity - 1
     default:
@@ -61,7 +77,12 @@ const reducer = (quantity, action) => {
 }
 
 const CartProduct = (props) => {
-  const [quantity, dispatch] = useReducer(reducer, 1)
+  const { setCart, cartProducts } = useContext(AppContext)
+  const [quantity, dispatch] = useReducer(reducer, props.quantity)
+
+  useEffect(() => {
+    props.setQuantity(quantity)
+  }, [quantity])
 
   return (
     <div className={styles.product}>
@@ -72,7 +93,7 @@ const CartProduct = (props) => {
         </div>
         <div className={styles.spaceBetween}>
           <div className={styles.quantity}>Quantity: {quantity}</div>
-          <div className={styles.price}>$ {props.price * quantity}</div>
+          <div className={styles.price}>$ {quantity * props.price}</div>
         </div>
       </div>
       <div className={styles.buttons}>

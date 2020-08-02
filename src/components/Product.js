@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import AppContext from '../AppContext'
 
 import styles from './Product.module.css'
@@ -7,9 +7,27 @@ const Product = (props) => {
   const { cartProducts, setCartProducts } = useContext(AppContext)
   const [alreadyAdded, setAlreadyAdded] = useState(false)
 
+  const [quantity, setQuantity] = useState(1)
+
+  useEffect(() => {
+    setCartProducts((cartProducts) => {
+      const clone = [...cartProducts]
+
+      clone.forEach((product) => {
+        if (props.id === product.id) {
+          product.quantity = quantity
+        }
+      })
+      return clone
+    })
+  }, [quantity])
+
   const handleBuy = (product) => {
     setAlreadyAdded(true)
-    setCartProducts([...cartProducts, { ...product, quantity: 1 }])
+    setCartProducts([
+      ...cartProducts,
+      { ...product, quantity, setQuantity, id: product.id },
+    ])
   }
 
   return (
@@ -42,6 +60,7 @@ const ProductList = () => {
       {products.map((product) => (
         <Product
           key={product.id}
+          id={product.id}
           name={product.name}
           price={product.price}
           available={product.available}

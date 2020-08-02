@@ -1,4 +1,4 @@
-import React, { useState, createContext } from 'react'
+import React, { useState, useMemo, createContext } from 'react'
 
 const initialProducts = [
   { id: 1, name: 'Banana', price: 10.0, available: 10 },
@@ -12,10 +12,23 @@ export const AppContext = createContext()
 export const AppProvider = ({ children }) => {
   const [products, setProducts] = useState(initialProducts)
   const [cartProducts, setCartProducts] = useState([])
+  const [cart, setCart] = useState({
+    subtotal: 0,
+    shipping: 0,
+    discount: 0,
+    total: 0,
+  })
 
   return (
     <AppContext.Provider
-      value={{ products, cartProducts, setProducts, setCartProducts }}
+      value={{
+        products,
+        cartProducts,
+        setProducts,
+        setCartProducts,
+        cart,
+        setCart,
+      }}
     >
       {children}
     </AppContext.Provider>
