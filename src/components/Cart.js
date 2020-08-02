@@ -57,7 +57,9 @@ const CartProductList = () => {
           name={product.name}
           price={product.price}
           quantity={product.quantity}
+          initialAvailable={product.available}
           setQuantity={product.setQuantity}
+          setAvailable={product.setAvailable}
         />
       ))}
     </div>
@@ -82,6 +84,7 @@ const CartProduct = (props) => {
 
   useEffect(() => {
     props.setQuantity(quantity)
+    props.setAvailable(props.initialAvailable - quantity)
   }, [quantity])
 
   return (

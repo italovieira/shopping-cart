@@ -6,8 +6,8 @@ import styles from './Product.module.css'
 const Product = (props) => {
   const { cartProducts, setCartProducts } = useContext(AppContext)
   const [alreadyAdded, setAlreadyAdded] = useState(false)
-
   const [quantity, setQuantity] = useState(1)
+  const [available, setAvailable] = useState(props.available)
 
   useEffect(() => {
     setCartProducts((cartProducts) => {
@@ -26,7 +26,7 @@ const Product = (props) => {
     setAlreadyAdded(true)
     setCartProducts([
       ...cartProducts,
-      { ...product, quantity, setQuantity, id: product.id },
+      { ...product, quantity, setQuantity, setAvailable, id: product.id },
     ])
   }
 
@@ -38,7 +38,7 @@ const Product = (props) => {
           <strong>{props.name}</strong>
         </div>
         <span>
-          $ {props.price} &#8231; {props.available} left
+          $ {props.price} &#8231; {available} left
         </span>
       </div>
       <button
