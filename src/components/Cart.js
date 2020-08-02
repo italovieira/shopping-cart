@@ -42,7 +42,9 @@ const Cart = () => {
       <div>
         <div className={`${styles.spaceBetween} ${styles.margin}`}>
           <input type="text" placeholder="Discount code" />
-          <input type="submit" value="Apply" />
+          <button className={styles.applyButton}>
+            <strong>APPLY</strong>
+          </button>
         </div>
       </div>
 

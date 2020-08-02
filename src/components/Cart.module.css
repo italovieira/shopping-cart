@@ -29,10 +29,6 @@ input[type=text] {
   width: 60%;
 }
 
-input[type=submit] {
-  width: 30%;
-}
-
 hr {
   border: 0;
   border-top: 0.1px solid var(--secondary-color);
@@ -73,4 +69,11 @@ hr {
   flex: 1;
   padding: 0 10px;
   width: auto;
+}
+
+.applyButton {
+  background-color: var(--enabled-color);
+  color: white;
+  border-radius: 8px;
+  width: 30%;
 }
