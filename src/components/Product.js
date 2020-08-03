@@ -49,6 +49,7 @@ const Product = (props) => {
         className={styles.button}
         onClick={() => handleBuy(props)}
         disabled={alreadyAdded}
+        data-testid={`buy-button${props.id}`}
       >
         <strong>BUY</strong>
       </button>

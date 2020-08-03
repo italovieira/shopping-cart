@@ -104,6 +104,7 @@ const CartProductList = () => {
       {Array.from(cart.products).map((product) => (
         <CartProduct
           key={product.id}
+          id={product.id}
           name={product.name}
           price={product.price}
           quantity={product.quantity}
@@ -137,7 +138,7 @@ const CartProduct = (props) => {
   }, [quantity])
 
   return (
-    <div className={styles.product}>
+    <div className={styles.product} data-testid={`cart-product${props.id}`}>
       <div className={styles.image}></div>
       <div className={styles.productInfo}>
         <div className={styles.productName}>
