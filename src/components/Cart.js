@@ -145,7 +145,9 @@ const CartProduct = (props) => {
         </div>
         <div className={styles.spaceBetween}>
           <div className={styles.quantity}>Quantity: {quantity}</div>
-          <div className={styles.price}>$ {quantity * props.price}</div>
+          <div className={styles.price}>
+            $ {(quantity * props.price).toFixed(2)}
+          </div>
         </div>
       </div>
       <div className={styles.buttons}>
@@ -166,7 +168,7 @@ const CartInfo = (props) => {
   return (
     <div className={`${styles.spaceBetween} ${styles.margin}`}>
       <span>{props.title}</span>
-      <span>$ {props.value}</span>
+      <span>$ {props.value.toFixed(2)}</span>
     </div>
   )
 }

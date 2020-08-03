@@ -42,7 +42,7 @@ const Product = (props) => {
           <strong>{props.name}</strong>
         </div>
         <span>
-          $ {props.price} &#8231; {available} left
+          $ {props.price.toFixed(2)} &#8231; {available} left
         </span>
       </div>
       <button
