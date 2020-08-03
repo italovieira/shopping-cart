@@ -38,9 +38,8 @@ export const computeDiscount = (cart) => {
   }
 }
 
-export const computeTotal = (cart) => {
-  return cart.subtotal + cart.shipping - cart.discount
-}
+export const computeTotal = (cart) =>
+  Math.max(0, cart.subtotal + cart.shipping - cart.discount)
 
 export const updateProductQuantity = (id, quantity, products) => {
   const clone = Array.from(products)
