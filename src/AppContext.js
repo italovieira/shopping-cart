@@ -1,23 +1,26 @@
-import React, { useState, useReducer, createContext } from 'react'
+import React, { useState, useReducer, useEffect, createContext } from 'react'
+import axios from 'axios'
 import actions from './actions'
 
-const initialProducts = [
-  { id: 1, name: 'Banana', price: 10.0, available: 10 },
-  { id: 2, name: 'Apple', price: 20.0, available: 15 },
-  { id: 3, name: 'Orange', price: 30.0, available: 8 },
-  { id: 4, name: 'Mango', price: 15.0, available: 20 },
-]
+const initialProducts = []
 
-const vouchers = [
-  { id: 1, code: '#30OFF', type: 'percentual', amount: 30.0 },
-  { id: 2, code: '#100DOLLARS', type: 'fixed', amount: 100.0 },
-  { id: 3, code: '#SHIPIT', type: 'shipping', amount: 0, minValue: 300.5 },
-]
+const API = 'https://shielded-wildwood-82973.herokuapp.com'
 
 export const AppContext = createContext()
 
 export const AppProvider = ({ children }) => {
-  const [products, setProducts] = useState(initialProducts)
+  const [products, setProducts] = useState([])
+  const [vouchers, setVouchers] = useState([])
+
+  useEffect(() => {
+    axios(`${API}/products.json`)
+      .then((res) => setProducts(res.data.products || []))
+      .catch((err) => console.log(err.message))
+
+    axios(`${API}/vouchers.json`)
+      .then((res) => setVouchers(res.data.vouchers || []))
+      .catch((err) => console.log(err.message))
+  }, [])
 
   const reducer = (cart, action) => {
     switch (action.type) {
