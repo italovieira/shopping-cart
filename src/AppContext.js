@@ -4,9 +4,14 @@ import { fetchProducts, fetchVouchers } from './api'
 
 export const AppContext = createContext()
 
-export const AppProvider = ({ children }) => {
-  const [products, setProducts] = useState([])
-  const [vouchers, setVouchers] = useState([])
+export const AppProvider = ({
+  children,
+  initialProducts,
+  initialVouchers,
+  initialCart,
+}) => {
+  const [products, setProducts] = useState(initialProducts || [])
+  const [vouchers, setVouchers] = useState(initialVouchers || [])
 
   useEffect(() => {
     fetchProducts().then((products) => setProducts(products))
@@ -32,14 +37,15 @@ export const AppProvider = ({ children }) => {
     }
   }
 
-  const [cart, dispatch] = useReducer(reducer, {
+  const emptyCart = {
     products: [],
     subtotal: 0,
     shipping: 0,
     discount: 0,
     total: 0,
     voucher: {},
-  })
+  }
+  const [cart, dispatch] = useReducer(reducer, initialCart || emptyCart)
 
   return (
     <AppContext.Provider
