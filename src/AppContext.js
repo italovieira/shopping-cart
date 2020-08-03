@@ -1,8 +1,6 @@
 import React, { useState, useReducer, useEffect, createContext } from 'react'
-import axios from 'axios'
 import actions from './actions'
-
-const API = 'https://shielded-wildwood-82973.herokuapp.com'
+import { fetchProducts, fetchVouchers } from './api'
 
 export const AppContext = createContext()
 
@@ -11,13 +9,8 @@ export const AppProvider = ({ children }) => {
   const [vouchers, setVouchers] = useState([])
 
   useEffect(() => {
-    axios(`${API}/products.json`)
-      .then((res) => setProducts(res.data.products || []))
-      .catch((err) => console.log(err.message))
-
-    axios(`${API}/vouchers.json`)
-      .then((res) => setVouchers(res.data.vouchers || []))
-      .catch((err) => console.log(err.message))
+    fetchProducts().then((products) => setProducts(products))
+    fetchVouchers().then((vouchers) => setVouchers(vouchers))
   }, [])
 
   const reducer = (cart, action) => {
