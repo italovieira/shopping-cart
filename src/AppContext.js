@@ -8,6 +8,12 @@ const initialProducts = [
   { id: 4, name: 'Mango', price: 15.0, available: 20 },
 ]
 
+const vouchers = [
+  { id: 1, code: '#30OFF', type: 'percentual', amount: 30.0 },
+  { id: 2, code: '#100DOLLARS', type: 'fixed', amount: 100.0 },
+  { id: 3, code: '#SHIPIT', type: 'shipping', amount: 0, minValue: 300.5 },
+]
+
 export const AppContext = createContext()
 
 export const AppProvider = ({ children }) => {
@@ -25,6 +31,8 @@ export const AppProvider = ({ children }) => {
         return { ...cart, total: action.payload }
       case actions.CART_UPDATE_PRODUCTS:
         return { ...cart, products: action.payload }
+      case actions.CART_APPLY_VOUCHER:
+        return { ...cart, voucher: action.payload }
       default:
         return cart
     }
@@ -36,6 +44,7 @@ export const AppProvider = ({ children }) => {
     shipping: 0,
     discount: 0,
     total: 0,
+    voucher: {},
   })
 
   return (

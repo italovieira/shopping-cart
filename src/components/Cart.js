@@ -1,16 +1,18 @@
-import React, { useContext, useReducer, useEffect } from 'react'
+import React, { useState, useContext, useReducer, useEffect } from 'react'
 import AppContext from '../AppContext'
 import {
   computeSubtotal,
   computeShipping,
   computeTotal,
+  computeDiscount,
 } from '../helpers/cart-helper'
 import actions from '../actions'
 
 import styles from './Cart.module.css'
 
 const Cart = () => {
-  const { cart, dispatch } = useContext(AppContext)
+  const { cart, dispatch, vouchers } = useContext(AppContext)
+  const [voucherCode, setVoucherCode] = useState()
 
   // update subtotal
   useEffect(() => {
@@ -28,10 +30,33 @@ const Cart = () => {
     })
   }, [cart.products, cart.subtotal])
 
+  // update discount
+  useEffect(() => {
+    dispatch({
+      type: actions.CART_COMPUTE_DISCOUNT,
+      payload: computeDiscount(cart),
+    })
+  }, [cart.voucher])
+
   // update total
   useEffect(() => {
     dispatch({ type: actions.CART_COMPUTE_TOTAL, payload: computeTotal(cart) })
   }, [cart.subtotal, cart.shipping, cart.discount])
+
+  const handleApplyVoucher = (e) => {
+    const voucher = vouchers.find((voucher) => voucher.code === voucherCode)
+
+    dispatch({
+      type: actions.CART_APPLY_VOUCHER,
+      payload: voucher || {},
+    })
+
+    e.preventDefault()
+  }
+
+  const handleOnChange = (e) => {
+    setVoucherCode(e.target.value.trim())
+  }
 
   return (
     <section className={styles.container}>
@@ -40,12 +65,20 @@ const Cart = () => {
       <CartProductList />
 
       <div>
-        <div className={`${styles.spaceBetween} ${styles.margin}`}>
-          <input type="text" placeholder="Discount code" />
+        <form
+          className={`${styles.spaceBetween} ${styles.margin}`}
+          onSubmit={handleApplyVoucher}
+        >
+          <input
+            type="text"
+            placeholder="Discount code"
+            onChange={handleOnChange}
+            value={voucherCode}
+          />
           <button className={styles.applyButton}>
             <strong>APPLY</strong>
           </button>
-        </div>
+        </form>
       </div>
 
       <div className={styles.info}>

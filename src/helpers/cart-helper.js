@@ -22,6 +22,22 @@ export const computeShipping = (cart) => {
   return 30 + Math.floor((quantity - 10) / 5) * 7
 }
 
+export const computeDiscount = (cart) => {
+  const voucher = cart.voucher
+  switch (voucher.type) {
+    case 'percentual':
+      return (cart.subtotal * voucher.amount) / 100
+    case 'fixed':
+      return voucher.amount
+    case 'shipping':
+      return cart.subtotal >= voucher.minValue
+        ? cart.shipping - voucher.amount
+        : 0
+    default:
+      return 0
+  }
+}
+
 export const computeTotal = (cart) => {
   return cart.subtotal + cart.shipping - cart.discount
 }
