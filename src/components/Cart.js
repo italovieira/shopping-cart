@@ -119,10 +119,10 @@ const CartProductList = () => {
 const reducer = (quantity, action) => {
   switch (action.type) {
     case 'INCREMENT':
-      return quantity + 1
+      return Math.min(action.available, quantity + 1)
 
     case 'DECREMENT':
-      return quantity - 1
+      return Math.max(0, quantity - 1)
     default:
       return quantity
   }
@@ -149,7 +149,13 @@ const CartProduct = (props) => {
         </div>
       </div>
       <div className={styles.buttons}>
-        <button onClick={() => dispatch({ type: 'INCREMENT' })}>+</button>
+        <button
+          onClick={() =>
+            dispatch({ type: 'INCREMENT', available: props.initialAvailable })
+          }
+        >
+          +
+        </button>
         <button onClick={() => dispatch({ type: 'DECREMENT' })}>-</button>
       </div>
     </div>
