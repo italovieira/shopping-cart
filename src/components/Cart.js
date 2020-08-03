@@ -82,14 +82,22 @@ const Cart = () => {
       </div>
 
       <div className={styles.info}>
-        <CartInfo title="Subtotal" value={cart.subtotal} />
+        <span data-testid="subtotal">
+          <CartInfo title="Subtotal" value={cart.subtotal} />
+        </span>
         <hr />
-        <CartInfo title="Shipping" value={cart.shipping} />
+        <span data-testid="shipping">
+          <CartInfo title="Shipping" value={cart.shipping} />
+        </span>
         <hr />
-        <CartInfo title="Discount" value={cart.discount} />
+        <span data-testid="discount">
+          <CartInfo title="Discount" value={cart.discount} />
+        </span>
         <hr />
         <strong>
-          <CartInfo title="Total" value={cart.total} />
+          <span data-testid="total">
+            <CartInfo title="Total" value={cart.total} />
+          </span>
         </strong>
       </div>
     </section>
