@@ -38,10 +38,14 @@
   place-items: center;
   width: inherit;
   height: 40px;
-  background-color: black;
+  background-color: var(--enabled-color);
   color: white;
   border-bottom-left-radius: inherit;
   border-bottom-right-radius: inherit;
+}
+
+.button:disabled {
+  background-color: var(--disabled-color);
 }
 
 .productList {
