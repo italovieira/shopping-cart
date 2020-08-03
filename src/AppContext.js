@@ -2,8 +2,6 @@ import React, { useState, useReducer, useEffect, createContext } from 'react'
 import axios from 'axios'
 import actions from './actions'
 
-const initialProducts = []
-
 const API = 'https://shielded-wildwood-82973.herokuapp.com'
 
 export const AppContext = createContext()
