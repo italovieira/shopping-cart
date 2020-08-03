@@ -36,7 +36,7 @@ const Cart = () => {
       type: actions.CART_COMPUTE_DISCOUNT,
       payload: computeDiscount(cart),
     })
-  }, [cart.voucher])
+  }, [cart.voucher, cart.subtotal])
 
   // update total
   useEffect(() => {
