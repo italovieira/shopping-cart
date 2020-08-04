@@ -8,13 +8,15 @@ The requirements can be readed in https://gist.github.com/sobrinho/2f8d633aab22e
 
 ## Development
 
-### How to run
-- yarn
-- yarn start
+### Starting
+```sh
+$ yarn
+```
+```sh
+$ yarn start
+```
 
-### How to test
-- yarn test
-
-
-
-
+### Testing
+```sh
+$ yarn test
+```
