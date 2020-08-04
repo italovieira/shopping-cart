@@ -14,8 +14,8 @@ export const AppProvider = ({
   const [vouchers, setVouchers] = useState(initialVouchers || [])
 
   useEffect(() => {
-    fetchProducts().then((products) => setProducts(products))
-    fetchVouchers().then((vouchers) => setVouchers(vouchers))
+    fetchProducts(5).then((products) => setProducts(products))
+    fetchVouchers(5).then((vouchers) => setVouchers(vouchers))
   }, [])
 
   const reducer = (cart, action) => {
