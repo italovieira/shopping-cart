@@ -12,7 +12,7 @@ import styles from './Cart.module.css'
 
 const Cart = () => {
   const { cart, dispatch, vouchers } = useContext(AppContext)
-  const [voucherCode, setVoucherCode] = useState()
+  const [voucherCode, setVoucherCode] = useState('')
 
   // update subtotal
   useEffect(() => {
@@ -74,8 +74,9 @@ const Cart = () => {
             placeholder="Discount code"
             onChange={handleOnChange}
             value={voucherCode}
+            data-testid="voucher-input"
           />
-          <button className={styles.applyButton}>
+          <button className={styles.applyButton} data-testid="voucher-button">
             <strong>APPLY</strong>
           </button>
         </form>
