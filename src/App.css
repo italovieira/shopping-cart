@@ -21,7 +21,9 @@ main {
 
 .theme {
   --primary-color: #ecf0f1;
-  --secondary-color: #bdc3c7;
-  --enabled-color: #000000;
+  --secondary-color: #033e8c;
+  --enabled-color: #d91a1a;
   --disabled-color: #bdc3c7;
+  --borders-color: #999999;
+  --image-color: #999999;
 }
